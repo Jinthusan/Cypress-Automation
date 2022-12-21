@@ -11,7 +11,8 @@ describe('Forms Test Suit', function(){
     it('Forms Test Case', function(){
 
         const formPage=new FormPage()
-        cy.visit(Cypress.env('URL')+ '/automation-practice-form')
+        cy.visit('https://demoqa.com/automation-practice-form')
+       // cy.visit(Cypress.env('URL')+ '/automation-practice-form')
         //Adding firstname & Lastname
         //cy.get('#firstName').type(this.data.fname)
         formPage.getFirstName().type('UserFirstName')
