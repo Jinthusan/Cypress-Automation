@@ -1,45 +1,55 @@
 ///<reference types="Cypress" />
+import FormPage from '../support/POM/FormPage'
 
 describe('Forms Test Suit', function(){
+
+    before(function(){
+        cy.fixture('example').then(function(data){
+           this.data= data
+        })
+    })
     it('Forms Test Case', function(){
-        cy.visit('https://demoqa.com/automation-practice-form')
+
+        const formPage=new FormPage()
+        cy.visit(Cypress.env('URL')+ '/automation-practice-form')
         //Adding firstname & Lastname
-        cy.get('#firstName').type('UserFirstName')
-        cy.get('#lastName').type('UserLastName')
+        //cy.get('#firstName').type(this.data.fname)
+        formPage.getFirstName().type('UserFirstName')
+        //cy.pause()
+        formPage.getLastName().type('UserLastName')
         //Adding email
-        cy.get('#userEmail').type('user@gmail.com')
+        formPage.getEmail().type('user@gmail.com')
         //Selecting gender
-        cy.get('#gender-radio-1').check({force: true})
+        formPage.getGender().check({force: true})
         //Entering mobile num
-        cy.get('#userNumber').type('9477345403')
+        formPage.getPhoneNum().type('9477345403')
         //Picking DOB
-        cy.get('#dateOfBirthInput').click()
-        cy.get('.react-datepicker__month-select').select('December')
-        cy.get('.react-datepicker__year-select').select('1996')
-        cy.get('.react-datepicker__day--012').click()
+        formPage.getDOB().click()
+        formPage.getMonth().select('December')
+        formPage.getYear().select('1996')
+        formPage.getDate().click()
         //Adding Subject
-        cy.get('.subjects-auto-complete__value-container').type('Maths')
+        formPage.getSubject().type('Maths')
         //Checking hobbies
-        cy.get('input[type="checkbox"]').check({force: true})
+        formPage.getHobbies().check({force: true})
         //cy.get('input[type="checkbox"]').check('1',{force: true})
         //Uploading file
-        cy.get('#uploadPicture').selectFile('C:/Users/jinthusan.baskaran/Downloads/sampleFile.jpeg')
+        formPage.getUploadPicture().selectFile('C:/Users/jinthusan.baskaran/Downloads/sampleFile.jpeg')
         //Adding user address
-        cy.get('#currentAddress').type('USerAddress')
+        formPage.getAddress().type('USerAddress')
 
         //Select State & City
-        cy.xpath('//div[text()="Select State"]').click()
-        cy.xpath('//div[@id="react-select-3-option-2"]').click()
+        // formPage.getState().click()
+        // formPage.getStateClick().click()
 
         //Select City
-        cy.xpath('//div[text()="Select City"]').should('be.visible')
-        cy.xpath('//div[text()="Select City"]').click()
-        cy.xpath('//div[@id="react-select-4-option-0"]').click()
+        formPage.getCityClick().should('be.visible')
+        formPage.getCityClick().click()
+        formPage.getCity().click()
 
         //Submit form
-        cy.get('#submit').click({force: true})
+        formPage.getSubmitForm().click({force: true})
         //Close confirmation page
-        cy.get('#closeLargeModal').click({force:true})
-        
+        formPage.getCloseForm().click({force:true})
     })
 })
