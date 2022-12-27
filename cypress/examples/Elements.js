@@ -72,6 +72,13 @@ describe('Elements Test Suit', function(){
         cy.xpath('//span[@id="delete-record-2"]').click()
         cy.xpath('//*[@class="rt-tr -even"]//child::div[1] [text()="Alden"]').should('not.exist')
     })
+    //Navigate New Tabs
+    it.only('Handling new Browser Tab', function () {
+        cy.visit(Cypress.env('URL')+ '/links')
+        cy.xpath('//*[@id="simpleLink"]').invoke('removeAttr', 'target').click()
+        cy.url().should('not.include', 'links')
+        //cy.get('h3').should('have.text', 'New Window') */
+    })
 })
         
 

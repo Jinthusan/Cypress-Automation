@@ -1,5 +1,6 @@
 ///<reference types="Cypress" />
 import FormPage from '../support/POM/FormPage'
+// import neatCSV from 'neat-csv';
 
 describe('Forms Test Suit', function(){
 
@@ -14,8 +15,8 @@ describe('Forms Test Suit', function(){
         cy.visit('https://demoqa.com/automation-practice-form')
        // cy.visit(Cypress.env('URL')+ '/automation-practice-form')
         //Adding firstname & Lastname
-        //cy.get('#firstName').type(this.data.fname)
-        formPage.getFirstName().type('UserFirstName')
+        cy.get('#firstName').type(this.data.fname)
+        //formPage.getFirstName().type('UserFirstName')
         //cy.pause()
         formPage.getLastName().type('UserLastName')
         //Adding email
@@ -53,4 +54,18 @@ describe('Forms Test Suit', function(){
         //Close confirmation page
         formPage.getCloseForm().click({force:true})
     })
+    /* it.only('CSV File reading', function(){
+
+        cy.readFile(Cypress.config("fileServerFolder")+"/cypress/downloads/dataFile.csv").then(async(text)=>
+  {
+
+    const csv =  await neatCSV(text)
+
+    console.log(csv)
+
+    const dataCSV = csv[0]["name"]
+
+
+  })
+    }) */
 })
