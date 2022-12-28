@@ -2,8 +2,6 @@
 describe('Web Tables', function(){
     it('Normal Alert', function(){
         cy.visit(Cypress.env('URL')+ '/webtables')
-        //cy.visit('https://demoqa.com/webtables')
-
         cy.xpath('//div[@class="rt-tr -odd"]//*[@class="rt-td"] [1]').each(($el, index, $list) =>{
             const tableText = $el.text()
             if(tableText.includes('Kierra')){

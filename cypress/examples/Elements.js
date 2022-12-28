@@ -73,12 +73,28 @@ describe('Elements Test Suit', function(){
         cy.xpath('//*[@class="rt-tr -even"]//child::div[1] [text()="Alden"]').should('not.exist')
     })
     //Navigate New Tabs
-    it.only('Handling new Browser Tab', function () {
+    it('Handling new Browser Tab', function () {
         cy.visit(Cypress.env('URL')+ '/links')
         cy.xpath('//*[@id="simpleLink"]').invoke('removeAttr', 'target').click()
         cy.url().should('not.include', 'links')
-        //cy.get('h3').should('have.text', 'New Window') */
     })
+
+    //assert request 
+    it.only('Assert api call response code', function () {
+        cy.visit(Cypress.env('URL')+ '/links')
+        cy.xpath('//*[@id="bad-request"]').click()
+        cy.request({method:'GET', url:'https://demoqa.com/bad-request', failOnStatusCode: false}).then(function(req){
+            const stausCode = req.status
+            cy.log(req.status)
+            cy.xpath('//*[@id="linkResponse"]//b[1]').then(function(browserCode){
+                const browserStatusCode = browserCode.text()
+                cy.log(browserCode.text())
+                expect(stausCode).to.eq(browserStatusCode)
+            })
+        })
+        cy.url().should('not.include', 'links')
+    })
+
 })
         
 
