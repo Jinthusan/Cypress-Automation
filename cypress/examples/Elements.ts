@@ -85,7 +85,7 @@ describe('Elements Test Suit', function(){
         cy.xpath('//*[@id="bad-request"]').click()
         cy.request({method:'GET', url:'https://demoqa.com/bad-request', failOnStatusCode: false}).then(function(req){
             const stausCode = req.status
-            cy.log(req.status)
+            //cy.log(req.status)
             cy.xpath('//*[@id="linkResponse"]//b[1]').then(function(browserCode){
                 const browserStatusCode = browserCode.text()
                 cy.log(browserCode.text())

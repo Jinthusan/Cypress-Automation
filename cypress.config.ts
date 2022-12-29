@@ -1,4 +1,4 @@
-const { defineConfig } = require("cypress");
+import { defineConfig } from "cypress";
 
 module.exports = defineConfig({
   defaultCommandTimeout: 10000,
@@ -13,6 +13,6 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    specPattern:'cypress/examples/*.js'
+    specPattern:'cypress/examples/*.ts'
   },
 });
